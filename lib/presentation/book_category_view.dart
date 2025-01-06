@@ -1,10 +1,12 @@
+
+
 import 'package:flutter/material.dart';
 import 'package:http/http.dart' as http;
 import 'package:intern_app/providers/favourite_provider.dart';
 import 'dart:convert';
 import 'package:shimmer/shimmer.dart';
 import 'package:provider/provider.dart';
-import 'package:shared_preferences/shared_preferences.dart';
+
 
 import 'book_detail_screen.dart';
 
@@ -14,14 +16,19 @@ class CategoryViewScreen extends StatelessWidget {
   CategoryViewScreen({required this.category});
 
   Future<List> fetchBooks() async {
-    final response = await http.get(Uri.parse(
-        'https://www.googleapis.com/books/v1/volumes?q=subject:$category'));
+    try {
+      final response = await http.get(Uri.parse(
+          'https://www.googleapis.com/books/v1/volumes?q=subject:$category'));
 
-    if (response.statusCode == 200) {
-      final data = json.decode(response.body);
-      return data['items'] ?? [];
-    } else {
-      throw Exception('Failed to fetch books');
+      if (response.statusCode == 200) {
+        final data = json.decode(response.body);
+        return data['items'] ?? [];
+      } else {
+        throw Exception('Failed to fetch books: ${response.statusCode}');
+      }
+    } catch (error) {
+      throw Exception(
+          'Failed to fetch books. Please check your internet connection and try again.');
     }
   }
 
@@ -63,7 +70,36 @@ class CategoryViewScreen extends StatelessWidget {
             },
           );
         } else if (snapshot.hasError) {
-          return Center(child: Text('Error: ${snapshot.error}'));
+          return Center(
+            child: Column(
+              mainAxisAlignment: MainAxisAlignment.center,
+              children: [
+                Icon(Icons.error, size: 50, color: Colors.red),
+                SizedBox(height: 20),
+                Text(
+                  'Oops! Something went wrong.',
+                  style: TextStyle(fontSize: 18, fontWeight: FontWeight.bold),
+                ),
+                SizedBox(height: 10),
+                Text(
+                  'Please check your internet connection or try again later.',
+                  textAlign: TextAlign.center,
+                  style: TextStyle(fontSize: 16),
+                ),
+                SizedBox(height: 20),
+                ElevatedButton(
+                  onPressed: () {
+                    // Retry the request when the button is pressed
+                    Navigator.of(context).pushReplacement(MaterialPageRoute(
+                      builder: (context) =>
+                          CategoryViewScreen(category: category),
+                    ));
+                  },
+                  child: Text('Retry'),
+                ),
+              ],
+            ),
+          );
         } else {
           final books = snapshot.data ?? [];
           return ListView.builder(

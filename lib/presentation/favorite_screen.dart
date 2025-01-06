@@ -9,9 +9,6 @@ class FavoriteScreen extends StatelessWidget {
     final favoriteProvider = Provider.of<FavoriteProvider>(context);
 
     return Scaffold(
-      appBar: AppBar(
-        title: Text('Favorites'),
-      ),
       body: favoriteProvider.favorites.isEmpty
           ? Center(
               child: Text('No favorite books yet'),
@@ -20,8 +17,8 @@ class FavoriteScreen extends StatelessWidget {
               itemCount: favoriteProvider.favorites.length,
               itemBuilder: (context, index) {
                 final book = favoriteProvider.favorites[index];
-                final imageUrl = book['imageLinks']?['thumbnail'] ??
-                    'https://via.placeholder.com/50';
+                final imageUrl =
+                    book['imageUrl'] ?? 'https://via.placeholder.com/50';
 
                 return GestureDetector(
                   onTap: () {
@@ -46,8 +43,11 @@ class FavoriteScreen extends StatelessWidget {
                         },
                       ),
                       title: Text(book['title'] ?? 'No Title'),
-                      subtitle:
-                          Text(book['authors']?.join(', ') ?? 'No Author'),
+                      subtitle: Text(
+                        (book['authors'] is List<dynamic>)
+                            ? (book['authors'] as List<dynamic>).join(', ')
+                            : 'No Author',
+                      ),
                       trailing: IconButton(
                         icon: Icon(Icons.favorite, color: Colors.red),
                         onPressed: () {
