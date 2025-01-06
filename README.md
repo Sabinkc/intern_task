@@ -22,13 +22,16 @@ Follow these steps to run the project on your local machine:
 ### 1. Clone the Repository
 
 To get a copy of the project on your local machine, use the following command in your terminal:
+
 git clone https://github.com/Sabinkc/intern_task
 
 cd favorite-books-app
 
 Before running the app, you need to install the necessary dependencies. In the terminal, run:
+
 flutter pub get
 
 To launch the app on an emulator or a connected device, use the following command:
+
 flutter run
 
