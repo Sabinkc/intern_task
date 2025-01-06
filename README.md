@@ -23,6 +23,7 @@ Follow these steps to run the project on your local machine:
 
 To get a copy of the project on your local machine, use the following command in your terminal:
 git clone https://github.com/Sabinkc/intern_task
+
 cd favorite-books-app
 
 Before running the app, you need to install the necessary dependencies. In the terminal, run:
