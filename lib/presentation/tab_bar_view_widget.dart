@@ -1,5 +1,4 @@
 import 'package:flutter/material.dart';
-import 'package:intern_app/common/constants.dart';
 import 'book_category_view.dart';
 
 class TabBarViewWidget extends StatelessWidget {
@@ -9,10 +8,11 @@ class TabBarViewWidget extends StatelessWidget {
       length: 3,
       child: Column(
         children: [
+          //displays tabs in container with border
           Container(
             padding: EdgeInsets.all(10),
             decoration: BoxDecoration(
-              color: Colors.white, // Light background color for tab bar
+              color: Colors.white,
               borderRadius: BorderRadius.circular(10),
             ),
             child: TabBar(
@@ -21,13 +21,11 @@ class TabBarViewWidget extends StatelessWidget {
               indicatorWeight: 0,
               indicator: BoxDecoration(
                 border: Border.all(width: 1, color: Colors.white),
-                color: Colors.red, // Background color for the active tab
-                borderRadius: BorderRadius.circular(
-                    10), // Rounded corners for active tab box
+                color: Colors.red,
+                borderRadius: BorderRadius.circular(10),
               ),
-              labelColor: Colors.white, // Color of the text for selected tab
-              unselectedLabelColor:
-                  Colors.black, // Color of the text for unselected tabs
+              labelColor: Colors.white,
+              unselectedLabelColor: Colors.black,
               tabs: [
                 // Tabs with a Container to align with the Box
                 Tab(
@@ -78,6 +76,7 @@ class TabBarViewWidget extends StatelessWidget {
           Expanded(
             child: TabBarView(
               children: [
+                //screens to display in center based on tabs selected
                 CategoryViewScreen(category: "Technology"),
                 CategoryViewScreen(category: "Science"),
                 CategoryViewScreen(category: "History"),

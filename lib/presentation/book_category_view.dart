@@ -1,5 +1,3 @@
-
-
 import 'package:flutter/material.dart';
 import 'package:http/http.dart' as http;
 import 'package:intern_app/providers/favourite_provider.dart';
@@ -11,10 +9,11 @@ import 'package:provider/provider.dart';
 import 'book_detail_screen.dart';
 
 class CategoryViewScreen extends StatelessWidget {
+  //takes category as argument to display data based on selected category in tab
   final String category;
 
   CategoryViewScreen({required this.category});
-
+//function to fetch books data from API
   Future<List> fetchBooks() async {
     try {
       final response = await http.get(Uri.parse(
@@ -43,6 +42,7 @@ class CategoryViewScreen extends StatelessWidget {
           return ListView.builder(
             itemCount: 5,
             itemBuilder: (context, index) {
+              //shows shimmer or skeleton effect in waiting or loading state of data
               return Shimmer.fromColors(
                 baseColor: Colors.grey[300]!,
                 highlightColor: Colors.grey[100]!,
@@ -70,6 +70,7 @@ class CategoryViewScreen extends StatelessWidget {
             },
           );
         } else if (snapshot.hasError) {
+          //error handling implementation to handle api errors
           return Center(
             child: Column(
               mainAxisAlignment: MainAxisAlignment.center,
@@ -101,7 +102,9 @@ class CategoryViewScreen extends StatelessWidget {
             ),
           );
         } else {
+          //stores api books data in books variable
           final books = snapshot.data ?? [];
+//displays the books data in card in listview 
           return ListView.builder(
             itemCount: books.length,
             itemBuilder: (context, index) {
@@ -133,10 +136,12 @@ class CategoryViewScreen extends StatelessWidget {
                           : Colors.grey,
                     ),
                     onPressed: () {
+                      //function to add or remove from favourite
                       favoriteProvider.toggleFavorite(book);
                     },
                   ),
                   onTap: () {
+                    //opens book details screen on pressing a specific book card
                     Navigator.of(context).push(
                       MaterialPageRoute(
                         builder: (context) => BookDetailScreen(book: book),

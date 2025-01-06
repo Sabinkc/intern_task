@@ -6,8 +6,9 @@ import 'home_screen.dart';
 class MyApp extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
+    //provider to handle light and dark theme
     final themeProvider = Provider.of<ThemeProvider>(context);
-
+//follows material design
     return MaterialApp(
       debugShowCheckedModeBanner: false,
       theme: ThemeData.light(),

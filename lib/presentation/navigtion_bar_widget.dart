@@ -11,24 +11,28 @@ class NavigationBarWidget extends StatefulWidget {
 }
 
 class _NavigationBarWidgetState extends State<NavigationBarWidget> {
-  int _currentIndex = 0; // Track the current index of the selected item
+  // Track the current index of the selected item
+  int _currentIndex = 0; 
 
   @override
   Widget build(BuildContext context) {
     return ConvexAppBar(
-      backgroundColor: CommonColor.primaryColor, // Background color of the bar
-      color: Colors.white, // Color for unselected items
-      activeColor: Colors.white, // Color for selected item
+      backgroundColor: CommonColor.primaryColor, 
+      color: Colors.white, 
+      activeColor: Colors.white, 
       items: const [
+        //items in bottom navigation bar
         TabItem(icon: Icons.home, title: 'Home'),
         TabItem(icon: Icons.favorite, title: 'Favorites'),
       ],
-      initialActiveIndex: _currentIndex, // Set the initial index
+      // Set the initial index
+      initialActiveIndex: _currentIndex, 
       onTap: (index) {
         setState(() {
-          _currentIndex = index; // Update the selected index
+           // Update the selected index
+          _currentIndex = index;
         });
-
+//logic for displaying data based on selected bottom navigation index
         if (index == 0) {
           Navigator.of(context).pushAndRemoveUntil(
             MaterialPageRoute(builder: (context) => HomeScreen()),

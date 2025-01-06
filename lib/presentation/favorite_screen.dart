@@ -11,8 +11,10 @@ class FavoriteScreen extends StatelessWidget {
     return Scaffold(
       body: favoriteProvider.favorites.isEmpty
           ? Center(
+            //shows no favourites books yet if not choosed any book as favourite
               child: Text('No favorite books yet'),
             )
+            //display the favourite item in card in listview
           : ListView.builder(
               itemCount: favoriteProvider.favorites.length,
               itemBuilder: (context, index) {

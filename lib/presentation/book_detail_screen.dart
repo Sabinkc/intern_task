@@ -3,6 +3,7 @@ import 'package:flutter/material.dart';
 import 'package:intern_app/common/constants.dart';
 
 class BookDetailScreen extends StatelessWidget {
+  //takes book as an argument which includes the book detail tapped by user
   final Map book;
 
   BookDetailScreen({required this.book});

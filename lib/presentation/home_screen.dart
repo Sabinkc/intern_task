@@ -12,12 +12,15 @@ class HomeScreen extends StatefulWidget {
 }
 
 class _HomeScreenState extends State<HomeScreen> {
-  int _currentIndex = 0; // Track the current selected index
+  // Track the current selected index
+  int _currentIndex = 0;
 
   // Define the screens for each tab
   final List<Widget> _screens = [
-    TabBarViewWidget(), // The main home content
-    FavoriteScreen(), // The favorites screen content
+    // The main home content
+    TabBarViewWidget(),
+    // The favorites screen content
+    FavoriteScreen(),
   ];
 
   @override
@@ -33,6 +36,7 @@ class _HomeScreenState extends State<HomeScreen> {
         centerTitle: true,
         backgroundColor: CommonColor.primaryColor,
         actions: [
+          //switch icon to change theme
           Switch(
             value: themeProvider.isDarkMode,
             onChanged: (value) {
@@ -51,20 +55,23 @@ class _HomeScreenState extends State<HomeScreen> {
               size: 37,
             )),
       ),
-      body: _screens[_currentIndex], // Display the selected screen
+      // Display the selected screen
+      body: _screens[_currentIndex],
       bottomNavigationBar: ConvexAppBar(
-        backgroundColor:
-            CommonColor.primaryColor, // Background color of the bar
-        color: Colors.white, // Color for unselected items
-        activeColor: Colors.white, // Color for the selected item
+        backgroundColor: CommonColor.primaryColor,
+        color: Colors.white,
+        activeColor: Colors.white,
         items: const [
+          //bottom navigation bar items
           TabItem(icon: Icons.home, title: 'Home'),
           TabItem(icon: Icons.favorite, title: 'Favorites'),
         ],
-        initialActiveIndex: _currentIndex, // Set the initial index
+        // Set the initial index
+        initialActiveIndex: _currentIndex,
         onTap: (index) {
           setState(() {
-            _currentIndex = index; // Update the selected index
+            // Update the selected index
+            _currentIndex = index;
           });
         },
       ),

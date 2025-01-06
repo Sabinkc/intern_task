@@ -1,7 +1,6 @@
 
-
 import 'package:flutter/material.dart';
-import 'package:intern_app/database/database_helper.dart';
+import 'package:intern_app/data/database_helper.dart';
 
 
 class FavoriteProvider extends ChangeNotifier {
