@@ -1,38 +1,3 @@
-// import 'package:flutter/material.dart';
-
-// class BookDetailScreen extends StatelessWidget {
-//   final Map book;
-
-//   BookDetailScreen({required this.book});
-
-//   @override
-//   Widget build(BuildContext context) {
-//     return Scaffold(
-//       appBar: AppBar(
-//         title: Text(book['title'] ?? 'Book Details'),
-//       ),
-//       body: Padding(
-//         padding: const EdgeInsets.all(16.0),
-//         child: Column(
-//           crossAxisAlignment: CrossAxisAlignment.start,
-//           children: [
-//             Text('Title: ${book['title']}', style: TextStyle(fontSize: 20, fontWeight: FontWeight.bold)),
-//             SizedBox(height: 10),
-//             Text('Author(s): ${book['authors']?.join(', ') ?? 'No Author'}'),
-//             SizedBox(height: 10),
-//             Text('Published Date: ${book['publishedDate'] ?? 'Unknown'}'),
-//             SizedBox(height: 10),
-//             book['imageLinks'] != null
-//                 ? Image.network(book['imageLinks']['thumbnail'])
-//                 : Icon(Icons.book, size: 100),
-//             SizedBox(height: 10),
-//             Text('Description: ${book['description'] ?? 'No Description'}'),
-//           ],
-//         ),
-//       ),
-//     );
-//   }
-// }
 
 import 'package:flutter/material.dart';
 import 'package:intern_app/common/constants.dart';

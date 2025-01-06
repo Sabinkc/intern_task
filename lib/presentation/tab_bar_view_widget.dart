@@ -78,9 +78,9 @@ class TabBarViewWidget extends StatelessWidget {
           Expanded(
             child: TabBarView(
               children: [
-                BookCategoryView(category: "Technology"),
-                BookCategoryView(category: "Science"),
-                BookCategoryView(category: "History"),
+                CategoryViewScreen(category: "Technology"),
+                CategoryViewScreen(category: "Science"),
+                CategoryViewScreen(category: "History"),
               ],
             ),
           ),

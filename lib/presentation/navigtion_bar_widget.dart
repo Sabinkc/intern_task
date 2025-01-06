@@ -1,36 +1,4 @@
-// import 'package:flutter/material.dart';
-// import 'home_screen.dart';
-// import 'favorite_screen.dart';
 
-// class NavigationBarWidget extends StatelessWidget {
-//   @override
-//   Widget build(BuildContext context) {
-//     return BottomNavigationBar(
-//       items: [
-//         BottomNavigationBarItem(
-//           icon: Icon(Icons.home),
-//           label: 'Home',
-//         ),
-//         BottomNavigationBarItem(
-//           icon: Icon(Icons.favorite),
-//           label: 'Favorites',
-//         ),
-//       ],
-//       onTap: (index) {
-//         if (index == 0) {
-//           Navigator.of(context).pushAndRemoveUntil(
-//             MaterialPageRoute(builder: (context) => HomeScreen()),
-//             (route) => false,
-//           );
-//         } else if (index == 1) {
-//           Navigator.of(context).push(
-//             MaterialPageRoute(builder: (context) => FavoriteScreen()),
-//           );
-//         }
-//       },
-//     );
-//   }
-// }
 import 'package:flutter/material.dart';
 import 'package:convex_bottom_bar/convex_bottom_bar.dart'; // Import the package
 import 'package:intern_app/common/constants.dart';

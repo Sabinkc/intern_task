@@ -1,14 +1,17 @@
 import 'package:flutter/material.dart';
 import 'package:http/http.dart' as http;
+import 'package:intern_app/providers/favourite_provider.dart';
 import 'dart:convert';
-import 'package:shimmer/shimmer.dart'; // Import the shimmer package
+import 'package:shimmer/shimmer.dart';
+import 'package:provider/provider.dart';
+import 'package:shared_preferences/shared_preferences.dart';
 
 import 'book_detail_screen.dart';
 
-class BookCategoryView extends StatelessWidget {
+class CategoryViewScreen extends StatelessWidget {
   final String category;
 
-  BookCategoryView({required this.category});
+  CategoryViewScreen({required this.category});
 
   Future<List> fetchBooks() async {
     final response = await http.get(Uri.parse(
@@ -24,13 +27,14 @@ class BookCategoryView extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    final favoriteProvider = Provider.of<FavoriteProvider>(context);
+
     return FutureBuilder<List>(
       future: fetchBooks(),
       builder: (context, snapshot) {
         if (snapshot.connectionState == ConnectionState.waiting) {
-          // Show shimmer effect while loading
           return ListView.builder(
-            itemCount: 5, // Show 5 loading shimmer cards
+            itemCount: 5,
             itemBuilder: (context, index) {
               return Shimmer.fromColors(
                 baseColor: Colors.grey[300]!,
@@ -67,7 +71,8 @@ class BookCategoryView extends StatelessWidget {
             itemBuilder: (context, index) {
               final book = books[index]['volumeInfo'];
               final imageUrl = book['imageLinks']?['thumbnail'] ??
-                  'https://via.placeholder.com/50'; // Fallback image URL
+                  'https://via.placeholder.com/50';
+
               return Card(
                 margin: EdgeInsets.symmetric(vertical: 10, horizontal: 15),
                 elevation: 5,
@@ -77,12 +82,24 @@ class BookCategoryView extends StatelessWidget {
                     imageUrl,
                     width: 50,
                     errorBuilder: (context, error, stackTrace) {
-                      return Icon(Icons.broken_image,
-                          size: 50); // Fallback icon
+                      return Icon(Icons.broken_image, size: 50);
                     },
                   ),
                   title: Text(book['title'] ?? 'No Title'),
                   subtitle: Text(book['authors']?.join(', ') ?? 'No Author'),
+                  trailing: IconButton(
+                    icon: Icon(
+                      favoriteProvider.isFavorite(book)
+                          ? Icons.favorite
+                          : Icons.favorite_border,
+                      color: favoriteProvider.isFavorite(book)
+                          ? Colors.red
+                          : Colors.grey,
+                    ),
+                    onPressed: () {
+                      favoriteProvider.toggleFavorite(book);
+                    },
+                  ),
                   onTap: () {
                     Navigator.of(context).push(
                       MaterialPageRoute(
