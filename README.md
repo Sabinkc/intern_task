@@ -1,6 +1,6 @@
 # Flutter Favorite Books App
 
-This is a simple Flutter application that allows you to save and manage your favorite books using SQLite. The app stores the book's title, authors, and image URL in a local SQLite database.
+This is a simple Flutter application that allows you to save and manage your favorite books fetched through API using SQLite. The app stores the book's title, authors, and image URL in a local SQLite database.
 
 ## Features:
 - Add books to the favorites list.
